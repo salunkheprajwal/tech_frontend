@@ -1,19 +1,9 @@
-// 'use client';
-
 import { Hero } from '@/components/hero';
 import Technologies from './Technologies/page';
 import Services from './services/page';
 import AboutUs from './aboutus/page';
 
-// async function getData() {
-//   return {
-//     // Add relevant data-fetching logic here, if needed
-//   };
-// }
-
-export default async function Home() {
-  // const data = await getData();
-
+export default function Home() {
   return (
     <main className="flex-grow pt-16 bg-black">
       <Hero />
@@ -34,12 +24,16 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* Remove extra padding between image and Technologies */}
-      <div className="pt-0">
+      {/* Add IDs for smooth scrolling */}
+      <div id="technologies" className="pt-0">
         <Technologies />
       </div>
-      <Services />
-      <AboutUs />
+      <div id="services">
+        <Services />
+      </div>
+      <div id="about-us">
+        <AboutUs />
+      </div>
     </main>
   );
 }
