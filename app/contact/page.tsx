@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react'; 
 import { Header } from '@/components/header';
 import Chatbot from '../chatbot';
 
@@ -12,17 +12,6 @@ interface Message {
 
 export default function ContactUs() {
   const [selectedProblems, setSelectedProblems] = useState<string[]>([]);
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [inputMessage, setInputMessage] = useState('');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
 
   const handleCheckboxChange = (problem: string) => {
     setSelectedProblems((prevSelected) =>
@@ -59,52 +48,6 @@ export default function ContactUs() {
     } catch (error) {
       console.error(error);
       alert('Failed to send email. Please try again.');
-    }
-  };
-
-  const sendMessage = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inputMessage.trim()) return;
-
-    const userMessage: Message = {
-      role: 'user',
-      content: inputMessage,
-      timestamp: new Date(),
-    };
-
-    setMessages((prev) => [...prev, userMessage]);
-    setInputMessage('');
-
-    try {
-      const response: Response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: inputMessage,
-        }),
-      });
-
-      if (!response.ok) throw new Error('Failed to get response');
-
-      const data: { response: string } = await response.json();  // Specify the type of 'data'
-
-      const botMessage: Message = {
-        role: 'assistant',
-        content: data.response,
-        timestamp: new Date(),
-      };
-
-      setMessages((prev) => [...prev, botMessage]);
-    } catch (error) {
-      console.error('Error:', error);
-      const errorMessage: Message = {
-        role: 'assistant',
-        content: 'Sorry, I encountered an error. Please try again.',
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
     }
   };
 
