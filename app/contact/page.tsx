@@ -4,11 +4,7 @@ import { useState } from 'react';
 import { Header } from '@/components/header';
 import Chatbot from '../chatbot';
 
-interface Message {
-  role: 'user' | 'assistant';
-  content: string;
-  timestamp: Date;
-}
+
 
 export default function ContactUs() {
   const [selectedProblems, setSelectedProblems] = useState<string[]>([]);
