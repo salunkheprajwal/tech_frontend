@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react'; 
+import { useState } from 'react'; 
 import { Header } from '@/components/header';
 import Chatbot from '../chatbot';
 
